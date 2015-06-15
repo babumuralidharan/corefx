@@ -29,5 +29,16 @@ namespace Xunit.TraitDiscoverers
                 break;
             }
         }
+        public IEnumerable<KeyValuePair<string, string>> GetTraits(IAttributeInfo traitAttribute)
+        {
+            IEnumerable<object> ctorArgs = traitAttribute.GetConstructorArguments();
+            foreach (var arg in ctorArgs)
+            {
+                string issue = arg.ToString();
+                yield return new KeyValuePair<string, string>("category", "failing");
+                yield return new KeyValuePair<string, string>("ActiveIssue", issue);
+                break;
+            }
+        }
     }
 }
